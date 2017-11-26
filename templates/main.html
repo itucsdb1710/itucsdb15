@@ -1,0 +1,76 @@
+{% extends"template.html" %}
+    <meta charset="utf-8" />
+    {% block title %}Mainpage{% endblock %}
+
+ {% block navbarInfo %}
+          <form class="navbar-form navbar-right" method="post">
+	            <div class="form-group">
+	            	<label for="inputEmail" class="sr-only">Email address</label>
+	        		<input type="email" name="inputEmail" class="form-control" placeholder="Email address" required>
+	            </div>
+	            <div class="form-group">
+	            	<label for="inputPassword" class="sr-only">Password</label>
+	        		<input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
+	            </div>
+            <button type="submit" class="btn btn-warning">Sign in</button>
+            <a class="btn btn-warning" href="{{ url_for('signup_page') }}">Sign up</a>
+          </form>
+ {% endblock %}
+
+{% block body %}
+    <div class="container">
+
+    <div style="background:transparent !important" class="jumbotron">
+	   <h1 ><img style="max-width:90px;"src="{{ url_for('static', filename='images/icon3.png') }}"></h1>
+        <h1>WELCOME!</h1>
+        <p>We’re pleased to bring you a friendly web experience, where you can find the best restaurant.</p>
+                <p><a class="btn btn-primary btn-warning" href="{{ url_for('signin_page') }}" role="button">Already a member?</a></p>
+
+    </div></div>
+<div class="container" style="max-width:1500px; min-height:100%">
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-5">
+          <h2>Finding your way to the perfect restaurant</h2>
+          <p>Millions of restaurant to rate and review from.</p>
+        </div>
+        <div class="col-md-5">
+          <h2>Ratings and comments</h2>
+          <p>Latest reviews and rates for each restaurant where you can compare their scores to see which one is the best for you.</p>
+       </div>
+      </div>
+
+	  <div class="row">
+        <div class="col-md-5">
+          <h2>Which type of food you're looking for?</h2>
+          <p>Chinese, Turkish, Japanese, Arabian and even more to look for! </p>
+        </div>
+        <div class="col-md-5">
+          <h2>Share your experience!</h2>
+          <p>We appreciate your time and effort in sharing your experience with us.</p>
+       </div>
+      </div>
+        <div class="row">
+        <div class="col-md-5">
+          <h2>Best restaurants near me</h2>
+          <p>Popular types of food and restaurants near you </p>
+        </div>
+        <div class="col-md-5">
+          <h2>Search for a restaurant</h2>
+          <p>you can search for a particular restaurant to see its rate and comments.</p>
+       </div>
+      </div>
+
+<footer class="page-footer">
+					</br></br></br></br></br>
+
+              <p >Copyright © 2017. All Rights Reserved.</p>
+
+
+        </footer>
+      <hr>
+</div>
+
+    </div> <!-- /container -->
+{% endblock %}

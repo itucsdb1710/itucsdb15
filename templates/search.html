@@ -1,0 +1,22 @@
+   {% extends"template2.html" %}
+
+    {% block title %}Search{% endblock %}
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<br><br><br>
+		<h5>Search by Restaurant name:</h5>
+           <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" class="  search-query form-control" placeholder="Search" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+	</div>
+</div>
+{% endblock %}

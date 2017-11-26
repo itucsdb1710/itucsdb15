@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}-Restaurant Reviewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon3.png') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='category.css') }}" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+
+ 	<!-- Website Font style -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <!-- Glyphicon cdn link -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+  		<div class="container-fluid">
+   		 <div class="navbar-fixed">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+			   <a class="navbar-brand" href="/home/">
+		<img style="max-width:250px;"src="{{ url_for('static', filename='images/logo-font.png') }}"></a>
+		    <div class="navbar-default">
+			   	<a class="navbar-brand" href="{{url_for('search_page')}}" style="margin-left: 50px"><span class="glyphicon glyphicon-search"></span> Search</a>
+			   	<a class="navbar-brand" href="{{url_for('category_page')}}"><span class="glyphicon glyphicon-th-list"></span> Food Category</a>
+			   	<a class="navbar-brand" href="{{url_for('home_page')}}"><span class="glyphicon glyphicon-heart"></span> My Favorites</a>
+			   	<a class="navbar-brand" href="{{url_for('nearby_page')}}"><span class="glyphicon glyphicon-cutlery"></span> Nearby Restaurants</a>
+		    </div>
+		   	<div class="navbar-right">
+		   		<a class="navbar-brand" href="{{url_for('profile_page')}}"><span class="glyphicon glyphicon-user"></span> Profile</a>
+			   	<a class="navbar-brand" href="{{url_for('settings_page')}}"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+			   	<a class="navbar-brand" href="{{url_for('main_page')}}"><span class="glyphicon glyphicon-off"></span> Log out</a>
+			</div>
+			</div>
+			 </nav>
+
+    <body background="{{ url_for('static', filename='images/wallpaper1.png') }}">
+{% block body %}{% endblock %}
+    </body >
+</html>

@@ -1,0 +1,50 @@
+{% extends"template2.html" %}
+
+    {% block title %}Settings{% endblock %}
+
+	{% block body %}
+		<div class="container">
+			<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title">Settings </h1>
+	               		<hr />
+	               	</div>
+	            </div>
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="post" action="#">
+
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Change email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="your new email ID"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Change password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="your new password"/>
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<div class="form-group ">
+							<a href="/leading" type="button" class="btn btn-primary btn-lg btn-block login-button btn-warning">Save</a>
+							<a href="/leading" type="button" class="btn btn-primary btn-lg btn-block login-button btn-danger">Delete Account</a>
+							<br><p class="text-muted">Hint: you can change one information also.</p>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
