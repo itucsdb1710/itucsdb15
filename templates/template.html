@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}-Restaurant Reviewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon3.png') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}" />
+    <!-- Website Font style -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	    <!-- Glyphicon cdn link -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-fixed">
+          <a class="navbar-brand" href="/">
+		<img style="max-width:250px;"src="{{ url_for('static', filename='images/logo-font.png') }}"></a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        {% block navbarInfo %}{% endblock %}
+        <!--/.navbar-collapse -->
+      </div>
+
+    </nav>
+
+    <body background="{{ url_for('static', filename='images/wallpaper1.png') }}">
+        <div class=container-fluid style="min-height:100% width:80%">
+
+
+{% block body %}{% endblock %}
+</div>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='bootstrap.min.js')}}"></script>
+
+    </body >
+
+</html>
