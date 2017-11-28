@@ -33,7 +33,7 @@ def get_elephantsql_dsn(vcap_services):
 
 @app.route('/home/', methods=['GET', 'POST'])
 def home_page():
-
+    print('home')
     if request.method == 'GET':
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
