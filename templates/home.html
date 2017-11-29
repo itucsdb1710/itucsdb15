@@ -1,0 +1,34 @@
+{% extends"template2.html" %}
+
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="container" style="max-width:1500px; min-height:100%">
+
+    <div class="container">
+		<br><br><br>
+
+	   <h1 > <img></h1>
+			{% if users %}
+          	{% for user in users %}
+
+
+<h1 class="title">Welcome back, {{user[1]}}</h1>
+
+			{% endfor %}
+			{% endif %}
+<br></br>
+<h4>A list of restaurants for you to look at: <img style="max-width:50px;"src="{{ url_for('static', filename='images/icon3.png') }}"></h4>
+		<br>
+		<form class="" action="" method="get">
+
+			{% if titles %}
+          	{% for title in titles %}
+						<!-- Those needs to be clickable -->
+	         				<li>{{title[1]}}</li>
+					{% endfor %}
+					{% endif %}
+
+</form>
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block title %}Sign in{% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<br><br><br><br>
+      <div class="container">
+
+  <div class="col-xs-3 col-xs-push-4">
+
+      <form class="form-signin" action="" method="post">
+        <h2 class="form-signin-heading">Sign in</h2>
+
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
+
+        <button class="btn btn-lg btn-primary btn-block btn-warning" type="submit">Sign in</button>
+        <br><p class="text-muted">Hint: If you're a new member click <a href="{{url_for('signup_page' )}}">Here!</a></p>
+
+
+      </form>
+</div></div>
+{% endblock %}

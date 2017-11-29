@@ -1,0 +1,29 @@
+{% extends"template2.html" %}
+
+    {% block title %}Settings{% endblock %}
+
+	{% block body %}
+	<br><br><br>
+		<head>
+
+</head>
+
+<div style="width:520px;margin:0px auto;margin-top:30px;">
+  <h2>Choose to search nearby Restaurant:</h2>
+  <select class="chosen" style="width:500px;">
+  <option>Istanbul - şişli</option>
+  <option>Istanbul - kağıthane</option>
+  <option>Istanbul - levent</option>
+  <option>Istanbul - beşiktaş</option>
+  <option>Ankara - Kazan</option>
+  <option>Ankara - Nallıhan</option>
+  <option>Ankara - Pursaklar</option>
+  <option>Ankara - Etimesgut</option>
+  </select>
+</div>
+
+<script type="text/javascript">
+      $(".chosen").chosen();
+</script>
+
+	{% endblock %}
