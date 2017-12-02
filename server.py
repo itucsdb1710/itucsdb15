@@ -13,12 +13,10 @@ from flask_login import LoginManager
 from flask_login.utils import login_required, login_user, current_user, logout_user
 from passlib.apps import custom_app_context as pwd_context
 
+from user import User
+from main import *
 
-def create_app():
-    app = Flask(__name__)
-    return app
-app =create_app()
-
+lm = LoginManager()
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -30,32 +28,67 @@ def get_elephantsql_dsn(vcap_services):
              dbname='{}'""".format(user, password, host, port, dbname)
     return dsn
 
+@lm.user_loader
+def load_user(userName):
+    return get_user(userName)
 
-@app.route('/home/', methods=['GET', 'POST'])
-def home_page():
+def get_user(user_id):
+    with dbapi2.connect(app.config['dsn']) as connection:
+        cursor = connection.cursor()
+        query = """SELECT * FROM USERS WHERE USERNAME = %s"""
+        cursor.execute(query, [user_id])
+        x = cursor.fetchall()
+        password = x[0][3]
+        user = User(x[0][0], x[0][1], x[0][2], x[0][3]) if password else None
+    return user
 
-        return render_template('home.html',titles=titles)
-
-@app.route('/', methods=['GET', 'POST'])
-def main_page():
-
-        return render_template('main.html')
+def create_app():
+    app = Flask(__name__)
+    app.register_blueprint(site)
+    return app
+app =create_app()
+lm.init_app(app)
+lm.login_view = 'signin_page'
 
 @app.route('/signin', methods=['GET', 'POST'])
 def signin_page():
+    if request.method == 'POST':
+        email=request.form['inputEmail']
+        password=request.form['inputPassword']
 
+        hashed = pwd_context.encrypt(password)
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT USERNAME FROM USERS WHERE MAIL = %s"""
+            cursor.execute(query, [email])
+            data = cursor.fetchall()
+            connection.commit()
+
+        user = get_user(data[0][0])
+        if user is not None:
+            if pwd_context.verify(password, user.password):
+                login_user(user)
+                next_page = request.args.get('next', url_for('site.main_page'))
+                return redirect(next_page)
+        next = request.args.get('next')
+        return redirect(next or url_for('site.main_page'))
+    else:
         return render_template('signin.html')
 
+@app.route('/', methods=['GET', 'POST'])
+def home_page():
+    return render_template('homepage.html')
 
 @app.route('/sign_up/', methods=['GET', 'POST'])
 def signup_page():
 
-        return render_template('sign_up.html')
+    return render_template('sign_up.html')
 
 @app.route("/logout/")
 def logout_page():
     logout_user()
-    return redirect(url_for('main_page'))
+    return redirect(url_for('home_page'))
 
 @app.route('/settings/', methods=['GET', 'POST'])
 def settings_page():
@@ -151,7 +184,7 @@ def initialize_database():
         cursor.execute(query)
 
         connection.commit()
-    return redirect(url_for('main_page'))
+    return redirect(url_for('home_page'))
 
 if __name__ == '__main__':
     app.secret_key = 'secret key'
