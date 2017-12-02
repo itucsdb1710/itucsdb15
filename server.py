@@ -118,7 +118,27 @@ def logout_page():
 
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
-    return render_template('homepage.html')
+    if request.method == 'POST':
+        email=request.form['inputEmail']
+        password=request.form['inputPassword']
+
+        hashed = pwd_context.encrypt(password)
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT USERNAME FROM USERS WHERE MAIL = %s"""
+            cursor.execute(query, [email])
+            data = cursor.fetchall()
+            connection.commit()
+
+        user = get_user(data[0][0])
+        if user is not None:
+            if pwd_context.verify(password, user.password):
+                login_user(user)
+                next_page = request.args.get('next', url_for('site.main_page'))
+                return redirect(next_page)
+    else:
+        return render_template('homepage.html')
 
 @app.route('/settings/', methods=['GET', 'POST'])
 @login_required
