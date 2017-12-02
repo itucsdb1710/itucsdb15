@@ -33,14 +33,7 @@ def get_elephantsql_dsn(vcap_services):
 
 @app.route('/home/', methods=['GET', 'POST'])
 def home_page():
-    print('home')
-    if request.method == 'GET':
-        with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-        query = """SELECT * FROM PUBLIC.HOTTITLES"""
-        cursor.execute(query)
-        titles=cursor.fetchall()
-        connection.commit()
+
         return render_template('home.html',titles=titles)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -90,6 +83,74 @@ def nearby_page():
 
 @app.route('/initdb')
 def initialize_database():
+
+    with dbapi2.connect(app.config['dsn']) as connection:
+        cursor = connection.cursor()
+
+        query = """DROP TABLE IF EXISTS USERS CASCADE"""
+        cursor.execute(query)
+        query = """DROP TABLE IF EXISTS POST CASCADE"""
+        cursor.execute(query)
+        query = """DROP TABLE IF EXISTS RESTAURANT CASCADE"""
+        cursor.execute(query)
+        query = """DROP TABLE IF EXISTS POSTCAST CASCADE"""
+        cursor.execute(query)
+        query=  """DROP TABLE IF EXISTS RST_DETAILS CASCADE """
+        cursor.execute(query)
+
+        query = """CREATE TABLE USERS (
+                    NAME VARCHAR(80) NOT NULL,
+                    USERNAME VARCHAR(20) PRIMARY KEY,
+                    MAIL VARCHAR(80) NOT NULL UNIQUE,
+                    PASSWORD VARCHAR(120) NOT NULL)"""
+        cursor.execute(query)
+
+        password = "admin"
+        hashed = pwd_context.encrypt(password)
+        query = """INSERT INTO USERS (NAME, USERNAME, MAIL, PASSWORD) VALUES ('admin', 'admin123', 'admin@itu.edu.tr', %s)"""
+        cursor.execute(query, [hashed])
+
+        query = """CREATE TABLE POST (
+                    POSTID SERIAL PRIMARY KEY,
+                    USERNAME VARCHAR(20) REFERENCES USERS(USERNAME) ON DELETE CASCADE,
+                    COMMENT VARCHAR(500) NOT NULL,
+                    RATE VARCHAR(20) DEFAULT 1)"""
+        cursor.execute(query)
+
+        query= """CREATE TABLE RESTAURANT (
+                    ID SERIAL PRIMARY KEY,
+                    NAME VARCHAR(20) NOT NULL,
+                    USERNAME VARCHAR(20) REFERENCES USERS(USERNAME) ON DELETE CASCADE,
+                    UNIQUE(NAME) )"""
+        cursor.execute(query)
+
+        query = """INSERT INTO RESTAURANT ( NAME, USERNAME ) VALUES ('Burger king', 'admin123')"""
+        cursor.execute(query)
+
+        query = """INSERT INTO RESTAURANT ( NAME, USERNAME ) VALUES ('Mado', 'admin123')"""
+        cursor.execute(query)
+
+        query= """CREATE TABLE POSTCAST (
+                    ID SERIAL PRIMARY KEY,
+                    RSTID INTEGER REFERENCES RESTAURANT(ID) ON DELETE CASCADE,
+                    POSTID INTEGER REFERENCES POST(POSTID) ON DELETE CASCADE,
+                    UNIQUE(RSTID, POSTID) )"""
+        cursor.execute(query)
+
+        query= """CREATE TABLE RST_DETAILS (
+                    ID SERIAL REFERENCES RESTAURANT(ID) ON DELETE CASCADE,
+                    NAME VARCHAR(20) REFERENCES RESTAURANT(NAME) ON DELETE CASCADE,
+                    LOCATION VARCHAR(20) NULL,
+                    CATEGORY VARCHAR(20) NULL,
+                    PRIMARY KEY(ID) )"""
+        cursor.execute(query)
+
+        query = """INSERT INTO RST_DETAILS ( NAME, LOCATION,CATEGORY ) VALUES ('Burger king', 'levent','fast food')"""
+        cursor.execute(query)
+        query = """INSERT INTO RST_DETAILS ( NAME, LOCATION,CATEGORY ) VALUES ('Mado', 'taksim','turkish food')"""
+        cursor.execute(query)
+
+        connection.commit()
     return redirect(url_for('main_page'))
 
 if __name__ == '__main__':
