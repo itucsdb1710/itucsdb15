@@ -107,7 +107,7 @@ def initialize_database():
 
         password = "admin"
         hashed = pwd_context.encrypt(password)
-        query = """INSERT INTO USERS (NAME, USERNAME, MAIL, PASSWORD) VALUES ('admin', 'admin123', 'admin@itu.edu.tr', %s)"""
+        query = """INSERT INTO USERS (NAME, USERNAME, MAIL, PASSWORD) VALUES ('admin', 'admin123', 'admin@admin.com', %s)"""
         cursor.execute(query, [hashed])
 
         query = """CREATE TABLE POST (
