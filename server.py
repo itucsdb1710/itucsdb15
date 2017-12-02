@@ -76,21 +76,51 @@ def signin_page():
     else:
         return render_template('signin.html')
 
-@app.route('/', methods=['GET', 'POST'])
-def home_page():
-    return render_template('homepage.html')
-
 @app.route('/sign_up/', methods=['GET', 'POST'])
 def signup_page():
+    if request.method == 'POST':
+        nameSurname=request.form['inputNameSurname']
+        username=request.form['inputUsername']
+        email=request.form['inputEmail']
+        password=request.form['inputPassword']
 
-    return render_template('sign_up.html')
+        hashed = pwd_context.encrypt(password)
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO USERS (NAME, USERNAME, MAIL, PASSWORD)
+            VALUES ('%s', '%s', '%s', '%s')""" %(nameSurname,username,email,hashed)
+            cursor.execute(query)
+            user = User(nameSurname, username,email,hashed)
+
+            connection.commit()
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """INSERT INTO INFO (USERNAME, SURNAME, AGE, COUNTRY,CITY,GENDER)
+             VALUES ('%s','%s', '%s', '%s', '%s', '%s')""" %(username,'........','........','........','........','........')
+            cursor.execute(query)
+            connection.commit()
+
+            login_user(user)
+        return redirect(url_for('site.main_page'))
+
+    else:
+        return render_template('signup.html')
+    return render_template('signup.html')
 
 @app.route("/logout/")
 def logout_page():
     logout_user()
     return redirect(url_for('home_page'))
 
+@app.route('/', methods=['GET', 'POST'])
+def home_page():
+    return render_template('homepage.html')
+
 @app.route('/settings/', methods=['GET', 'POST'])
+@login_required
 def settings_page():
     return render_template("settings.html")
 
@@ -116,11 +146,12 @@ def nearby_page():
 
 @app.route('/initdb')
 def initialize_database():
-
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
 
         query = """DROP TABLE IF EXISTS USERS CASCADE"""
+        cursor.execute(query)
+        query=  """DROP TABLE IF EXISTS INFO CASCADE """
         cursor.execute(query)
         query = """DROP TABLE IF EXISTS POST CASCADE"""
         cursor.execute(query)
@@ -140,8 +171,21 @@ def initialize_database():
 
         password = "admin"
         hashed = pwd_context.encrypt(password)
-        query = """INSERT INTO USERS (NAME, USERNAME, MAIL, PASSWORD) VALUES ('admin', 'admin123', 'admin@admin.com', %s)"""
+        query = """INSERT INTO USERS (NAME, USERNAME, MAIL, PASSWORD) VALUES ('admin', 'admin123', 'admin@itu.edu.tr', %s)"""
         cursor.execute(query, [hashed])
+
+        query = """CREATE TABLE INFO (
+                    USERNAME VARCHAR (50) REFERENCES USERS(USERNAME) ON DELETE CASCADE,
+                    SURNAME VARCHAR(80) NULL,
+                    AGE VARCHAR(20) NULL,
+                    COUNTRY VARCHAR(100)NULL,
+                    CITY VARCHAR(100) NULL,
+                    GENDER VARCHAR(50) NULL,
+                    PRIMARY KEY(USERNAME))"""
+        cursor.execute(query)
+
+        query = """INSERT INTO INFO (USERNAME, SURNAME,AGE,COUNTRY,CITY,GENDER) VALUES ('admin123','alrehaili','30','turkey','istanbul','female')"""
+        cursor.execute(query)
 
         query = """CREATE TABLE POST (
                     POSTID SERIAL PRIMARY KEY,
