@@ -16,7 +16,37 @@ site = Blueprint('site', __name__,template_folder='templates', static_folder='st
 @site.route('/mainpage/', methods=['GET', 'POST'])
 @login_required
 def main_page():
+    if request.method == 'POST':
 
-    return render_template('mainpage.html')
+        if request.form['action'] == 'add':
+            newRst = request.form['newRst']
+            username = current_user.userName
+            with dbapi2.connect(flask.current_app.config['dsn']) as connection:
+                cursor = connection.cursor()
+
+                query = """INSERT INTO RESTAURANT(NAME, USERNAME) VALUES(%s, %s)"""
+                cursor.execute(query,(newRst, username))
+                connection.commit()
+            with dbapi2.connect(flask.current_app.config['dsn']) as connection:
+                cursor = connection.cursor()
+
+                query = """INSERT INTO RST_DETAILS (NAME,LOCATION,CATEGORY)
+                VALUES ('%s', '%s', '%s') """ %(newRst,'not provided yet.','not provided yet.')
+                cursor.execute(query)
+                connection.commit()
+
+
+            return redirect(url_for('site.main_page'))
+    if request.method == 'GET':
+        with dbapi2.connect(flask.current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+        query = """SELECT * FROM RESTAURANT"""
+        cursor.execute(query)
+        names=cursor.fetchall()
+        query = """SELECT * FROM USERS"""
+        cursor.execute(query)
+        users=cursor.fetchall()
+        connection.commit()
+        return render_template('mainpage.html',names=names,users=users,user=current_user)
 
 

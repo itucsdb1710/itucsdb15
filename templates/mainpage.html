@@ -1,33 +1,47 @@
 {% extends"template2.html" %}
-
-{% block title %}Home{% endblock %}
+{% block title %}mainpage{% endblock %}
 {% block body %}
-<div class="container" style="max-width:1500px; min-height:100%">
-
-    <div class="container">
-		<br><br><br>
-
-	   <h1 > <img></h1>
+<div class="container" >
+    <div class="row" >
+		<div class="col-md-8" >
+		<br><br><br><br><br><br>
 			{% if users %}
-          	{% for user in users %}
+          	{% for u in users %}
 
-
-<h1 class="title">Welcome back, {{user[1]}}</h1>
+		{% if user.userName == u[1] %}
+<h1 class="title">Welcome back, {{u[0]}}</h1>
+			{% endif %}
 
 			{% endfor %}
 			{% endif %}
 <br></br>
+
 <h4>A list of restaurants for you to look at: <img style="max-width:50px;"src="{{ url_for('static', filename='images/icon3.png') }}"></h4>
 		<br>
 		<form class="" action="" method="get">
-
-			{% if titles %}
-          	{% for title in titles %}
-	         				<li>{{title[1]}}</li>
+			{% if names %}
+          	{% for name in names %}
+				<a href="#" class="" style= "font-size: 15px">
+	         		<li>{{name[1]}}</li>
+	       		</a>
 					{% endfor %}
 					{% endif %}
+		</form></div>
 
-</form>
+		<div class="col-md-4" >
+		<br><br><br><br><br><br><br>
+				<div style="margin: 10px 10px 60px 10px">
+					<h1 align="center">Add restaurant</h1>
+					<p align="center">you can add a new restaurant to the website!</p>
+					<form action="" method="post">
+					<div class="form-group" align="center">
+		    			<input type="text" name="newRst" placeholder="restaurant name.." class="form-control" required autofocus>
+		    		</div>
+					<button class=" pull-right btn btn-success btn"
+						type="submit" name="action" value="add">Add</button>
+					</form>
+				</div>
+			</div></div></div>
 {% endblock %}
 
 
