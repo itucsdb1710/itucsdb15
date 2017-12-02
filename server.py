@@ -111,6 +111,7 @@ def signup_page():
     return render_template('signup.html')
 
 @app.route("/logout/")
+@login_required
 def logout_page():
     logout_user()
     return redirect(url_for('home_page'))
@@ -125,26 +126,32 @@ def settings_page():
     return render_template("settings.html")
 
 @app.route('/profile/')
+@login_required
 def profile_page():
     return render_template("profile.html")
 
 @app.route('/edit_profile/', methods=['GET', 'POST'])
+@login_required
 def edit_profile_page():
     return render_template("edit_profile.html")
 
 @app.route('/search/')
+@login_required
 def search_page():
     return render_template("search.html")
 
 @app.route('/category/')
+@login_required
 def category_page():
     return render_template("category.html")
 
 @app.route('/nearby/')
+@login_required
 def nearby_page():
     return render_template("nearby.html")
 
 @app.route('/initdb')
+@login_required
 def initialize_database():
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
