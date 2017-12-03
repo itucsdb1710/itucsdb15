@@ -21,55 +21,88 @@
 
 						 <div class="row">
         			<div class="col-md-5">
-							<label for="email" class="cols-sm-2 control-label">Name:</label>
+							<label class="cols-sm-2 control-label">Name:</label>
 							</div>
 							        <div class="col-md-5">
-
-							 <p>blank</p>
+			{% if info %}
+          	{% for inf in info %}
+          	{% if user.userName == inf[1] %}
+			<p>{{ inf[0] }}</p>
+			{% endif %}
+			{% endfor %}
+			{% endif %}
 							</div>
 						</div>
 
 						 <div class="row">
         			<div class="col-md-5">
-							<label for="email" class="cols-sm-2 control-label">Surname:</label>
+							<label  class="cols-sm-2 control-label">Surname:</label>
 							</div>
 							        <div class="col-md-5">
 
-							 <p>blank </p>
+			{% if details %}
+          	{% for d in details %}
+          	{% if user.userName == d[0] %}
+			<p>{{ d[1] }}</p>
+			{% endif %}
+			{% endfor %}
+			{% endif %}
 							</div>
 						</div> <div class="row">
         			<div class="col-md-5">
-							<label for="email" class="cols-sm-2 control-label">Age:</label>
+							<label  class="cols-sm-2 control-label">Age:</label>
 							</div>
 							        <div class="col-md-5">
-
-							 <p>blank </p>
+			{% if details %}
+          	{% for d in details %}
+          	{% if user.userName == d[0] %}
+			<p>{{ d[2] }}</p>
+			{% endif %}
+			{% endfor %}
+			{% endif %}
 							</div>
 						</div> <div class="row">
         			<div class="col-md-5">
-							<label for="email" class="cols-sm-2 control-label">Country:</label>
+							<label  class="cols-sm-2 control-label">Country:</label>
 							</div>
 							        <div class="col-md-5">
-
-							 <p>blank </p>
+			{% if details %}
+          	{% for d in details %}
+          	{% if user.userName == d[0] %}
+							 <p>{{ d[3] }}</p>
+			{% endif %}
+			{% endfor %}
+			{% endif %}
 							</div>
 						</div>
 						<div class="row">
         			<div class="col-md-5">
-							<label for="email" class="cols-sm-2 control-label">City:</label>
+							<label  class="cols-sm-2 control-label">City:</label>
 							</div>
 							        <div class="col-md-5">
 
-							 <p>blank </p>
-							</div>
+			{% if details %}
+          	{% for d in details %}
+          	{% if user.userName == d[0] %}
+			<p>{{ d[4] }}</p>
+			{% endif %}
+			{% endfor %}
+			{% endif %}
+				</div>
 						</div>
 					<div class="row">
         			<div class="col-md-5">
-							<label for="email" class="cols-sm-2 control-label">Gender:</label>
+							<label  class="cols-sm-2 control-label">Gender:</label>
 							</div>
 							        <div class="col-md-5">
 
-							 <p>blank </p>
+			{% if details %}
+          	{% for d in details %}
+          	{% if user.userName == d[0] %}
+			<p>{{ d[5] }}</p>
+			{% endif %}
+			{% endfor %}
+			{% endif %}
 							</div>
 						</div>
 
