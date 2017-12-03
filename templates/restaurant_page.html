@@ -1,0 +1,97 @@
+{% extends "template2.html" %}
+{% block title %}Restaurant page{% endblock %}
+{% block body %}
+
+<div class="container">
+	<div class="row" >
+		<div class="col-md-4" >
+			<div id="profile-col" >
+				<div style="margin: 10px 10px 50px 10px">
+				<br><br><br><br>
+					{% if names %}
+					{% for name in names %}
+					<h1 >{{name[1]}}<br> Restaurant</h1>
+					<img style="max-width:200px; class="card-img-top" src="{{ url_for('static', filename='images/restaurant.png') }}" alt="Card image cap">
+												<br><br>
+					{% if food %}
+					{% for f in food %}
+						<h4>Location: {{f[2]}}</h4>
+						<h4>Food Category: {{f[3]}}</h4>
+					{% endfor %}
+					{% endif %}
+					{% if user.userName == name[2] %}
+						<form action="" method="post">
+						<button class="glyphicon glyphicon-trash pull-left btn btn-danger"
+								type="submit" name="action" value="delete"> Delete</button>
+						</form>
+					{% endif %}
+					{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<br>
+   			<div id="profile-col">
+   				<div style="margin: 40px 10px 50px 10px">
+	   				<form action="" method="post">
+						    <input name="x"class="star star-5" id="star-5" value="5" type="radio" name="star"/>
+						    <label class="star star-5" for="star-5"></label>
+						    <input name="x"class="star star-4" id="star-4" value="4" type="radio" name="star"/>
+						    <label class="star star-4" for="star-4"></label>
+						    <input name="x"class="star star-3" id="star-3" value="3"type="radio" name="star"/>
+						    <label class="star star-3" for="star-3"></label>
+						    <input name="x"class="star star-2" id="star-2" value="2"type="radio" name="star"/>
+						    <label class="star star-2" for="star-2"></label>
+						    <input name="x"class="star star-1" id="star-1" value="1"type="radio" name="star"/>
+						    <label class="star star-1" for="star-1"></label>
+
+						<div class="form-group" align="center">
+			   				<input type="text" name="commentInput" placeholder="write your comment.." class="form-control" required autofocus>
+			   			</div>
+						<button class="pull-right btn btn-success btn"
+						type="submit" name="action" value="send" data-toggle="tooltip" title="Rate before you send !">Send</button>
+								<script>
+								$(document).ready(function(){
+								    $('[data-toggle="tooltip"]').tooltip();
+								});
+								</script>
+					</form>
+					<br><br><br>
+   				{% if posts %}
+   				{% for post in posts %}
+	   					<br>
+						<div style=display:inline-block>
+				<img style="max-width:50px;"src="{{ url_for('static', filename='images/avatar.png') }}">
+						</div>
+						<div style=display:inline-block>
+							<p><em>@{{ post[0][1]}}</em></p>
+						</div>
+
+
+						<div>
+						<pre>{{ post[0][2] }}<div style=display:inline-block class="pull-right">
+
+						<b><em>rate: {{ post[0][3] }}</b></em></div></pre>
+						</div>
+
+		    			<div class="pull-right">
+		    				<a href="#" class="btn" >
+		    				Edit comment
+	       					</a>
+		    			</div>
+		    			<br>
+   				{% endfor %}
+				{% endif %}
+				</div>
+			 <!-- end of the post -->
+		</div>
+		</div>
+	</div>
+</div>
+<br>
+
+
+
+{% endblock %}

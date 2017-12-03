@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon3.png') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='signup1.css') }}" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='category.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='comments.css') }}" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-			   <a class="navbar-brand" href="/home/">
+			   <a class="navbar-brand" href="{{url_for('site.main_page')}}">
 		<img style="max-width:250px;"src="{{ url_for('static', filename='images/logo-font.png') }}"></a>
 		    <div class="navbar-default">
 			   	<a class="navbar-brand" href="{{url_for('search_page')}}" style="margin-left: 50px"><span class="glyphicon glyphicon-search"></span> Search</a>

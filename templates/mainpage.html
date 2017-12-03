@@ -21,7 +21,7 @@
 		<form class="" action="" method="get">
 			{% if names %}
           	{% for name in names %}
-				<a href="#" class="" style= "font-size: 15px">
+				<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" class="" style= "font-size: 15px">
 	         		<li>{{name[1]}}</li>
 	       		</a>
 					{% endfor %}

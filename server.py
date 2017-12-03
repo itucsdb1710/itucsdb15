@@ -146,7 +146,7 @@ def settings_page():
     return render_template("settings.html")
 
 
-@app.route('/pro/', methods=['GET', 'POST'])
+@app.route('/profile/', methods=['GET', 'POST'])
 @login_required
 def profile_page():
     if request.method == 'GET':
@@ -162,8 +162,8 @@ def profile_page():
 
         connection.commit()
         return render_template('profile.html',info=info,user=current_user,details=details)
-    
-    
+
+
 @app.route('/edit_profile/', methods=['GET', 'POST'])
 @login_required
 def edit_profile_page():
