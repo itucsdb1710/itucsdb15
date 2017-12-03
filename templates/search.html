@@ -2,21 +2,34 @@
 
     {% block title %}Search{% endblock %}
 {% block body %}
-
+<br><br><br>
 <div class="container">
 	<div class="row">
-		<br><br><br>
-		<h5>Search by Restaurant name:</h5>
-           <div id="custom-search-input">
+	<form method='POST'>
+		<h3>Search by name of Restaurant:</h3>
+           <div >
                             <div class="input-group col-md-12">
-                                <input type="text" class="  search-query form-control" placeholder="Search" />
+                                <input type="text"name="search-branch-name" class="search-query form-control" placeholder="Search.." />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-warning" type="button">
+                                    <button type="submit" name="action" class="pull-right btn btn-warning" value = "search">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
-                            </div>
+                            </div><br><br><br>
+                            {% if results %}
+				<ol>
+					{% for result in results %}
+					<a href="#" class="" style= "font-size: 15px">
+	         				<p>- {{result[1]}}</p>
+	       				</a>
+					{% endfor %}
+				 </ol>
+
+				{% endif %}
                         </div>
+			</form>
 	</div>
 </div>
+
+
 {% endblock %}
