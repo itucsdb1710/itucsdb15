@@ -145,15 +145,30 @@ def home_page():
 def settings_page():
     return render_template("settings.html")
 
-@app.route('/profile/')
+
+@app.route('/pro/', methods=['GET', 'POST'])
 @login_required
 def profile_page():
-    return render_template("profile.html")
+    if request.method == 'GET':
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+        query = """SELECT * FROM USERS"""
+        cursor.execute(query)
+        info=cursor.fetchall()
+        connection.commit()
+        query = """SELECT * FROM INFO"""
+        cursor.execute(query)
+        details=cursor.fetchall()
 
+        connection.commit()
+        return render_template('profile.html',info=info,user=current_user,details=details)
+    
+    
 @app.route('/edit_profile/', methods=['GET', 'POST'])
 @login_required
 def edit_profile_page():
     return render_template("edit_profile.html")
+
 
 @app.route('/search/', methods=['GET', 'POST'])
 @login_required
@@ -172,6 +187,7 @@ def search_page():
 
     else:
         return render_template('search.html')
+
 
 @app.route('/category/')
 @login_required
