@@ -155,10 +155,23 @@ def profile_page():
 def edit_profile_page():
     return render_template("edit_profile.html")
 
-@app.route('/search/')
+@app.route('/search/', methods=['GET', 'POST'])
 @login_required
 def search_page():
-    return render_template("search.html")
+
+    if request.method =='POST':
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            if request.form['action'] == 'search':
+                 branch_name = request.form['search-branch-name']
+                 query = """SELECT * FROM RESTAURANT WHERE (NAME = %s) """
+                 cursor.execute(query,[branch_name])
+                 name = cursor.fetchall()
+                 connection.commit()
+                 return render_template('search.html', results=name)
+
+    else:
+        return render_template('search.html')
 
 @app.route('/category/')
 @login_required
