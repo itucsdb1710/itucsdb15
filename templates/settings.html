@@ -19,7 +19,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="your new email ID"/>
+									<input type="email" class="form-control" name="inputEmail"placeholder="your new Email Address"/>
 								</div>
 							</div>
 						</div>
@@ -29,22 +29,29 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="your new password"/>
+									<input type="password" class="form-control" name="inputPassword"  placeholder="your new password"/>
 								</div>
 							</div>
 						</div>
 
 
-
-
 						<div class="form-group ">
-							<a href="/leading" type="button" class="btn btn-primary btn-lg btn-block login-button btn-warning">Save</a>
-							<a href="/leading" type="button" class="btn btn-primary btn-lg btn-block login-button btn-danger">Delete Account</a>
-							<br><p class="text-muted">Hint: you can change one information also.</p>
+						<button onclick="myFunction()" href="#" class="btn btn-primary btn-lg btn-block login-button btn-warning" type="submit" name="action" value="updateUser">
+							Save</button>
+						<button class="btn btn-primary btn-lg btn-block login-button btn-danger" type="submit" name="action" value="deleteUser">
+							Delete account</button>
+						<br><p class="text-muted">Hint: you can change one information also.</p>
 						</div>
 
 					</form>
 				</div>
 			</div>
 		</div>
-	{% endblock %}
+<script>
+function myFunction() {
+    alert("changes is saved!");
+}
+</script>
+
+</div> <!-- /container -->
+{% endblock %}
