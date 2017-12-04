@@ -22,47 +22,48 @@
         			<div class="col-md-3">
 							<label for="email" class="cols-sm-2 control-label">Name:</label></div>
 							<div class="col-md-9">
-				<input type="text" class="form-control" name="name" id="name"  placeholder="Edit your Name"/>
+				<input type="text" class="form-control" name="Name" placeholder="Edit your Name"/>
 							</div></div>
 
 						<div class="row">
         			<div class="col-md-3">
 							<label for="email" class="cols-sm-2 control-label">Surname:</label></div>
 							<div class="col-md-9">
-				<input type="text" class="form-control" name="name" id="name"  placeholder="Edit your Surname"/>
+				<input type="text" class="form-control" name="Surname"  placeholder="Edit your Surname"/>
 							</div></div>
 
 					<div class="row">
         			<div class="col-md-3">
 							<label for="email" class="cols-sm-2 control-label">Age:</label></div>
 							<div class="col-md-9">
-				<input type="text" class="form-control" name="name" id="name"  placeholder="Edit your Age"/>
+				<input type="text" class="form-control" name="Age"  placeholder="Edit your Age"/>
 							</div></div>
 
 						 <div class="row">
         			<div class="col-md-3">
 							<label for="email" class="cols-sm-2 control-label">Country:</label></div>
 							<div class="col-md-9">
-				<input type="text" class="form-control" name="name" id="name"  placeholder="Edit your Country"/>
+				<input type="text" class="form-control" name="Country"  placeholder="Edit your Country"/>
 							</div></div>
 
 						<div class="row">
         			<div class="col-md-3">
 							<label for="email" class="cols-sm-2 control-label">City:</label></div>
 							<div class="col-md-9">
-				<input type="text" class="form-control" name="name" id="name"  placeholder="Edit your City"/>
+				<input type="text" class="form-control" name="City"  placeholder="Edit your City"/>
 							</div></div>
 
 				<div class="row">
         			<div class="col-md-3">
 							<label for="email" class="cols-sm-2 control-label">Gender:</label></div>
 							<div class="col-md-9">
-				<input type="text" class="form-control" name="name" id="name"  placeholder="Edit your Gender"/>
+				<input type="text" class="form-control" name="Gender"  placeholder="Edit your Gender"/>
 							</div></div>
 
 						<div class="form-group ">
-							<a href="{{url_for('profile_page')}}" type="button" class="btn btn-primary btn-lg btn-block login-button btn-success">Save</a>
-							<a href="{{url_for('profile_page')}}" type="button" class="btn btn-primary btn-lg btn-block login-button btn-warning">Cancel</a>
+						<button onclick="myFunction()" class="btn btn-primary btn-lg btn-block login-button btn-success" type="submit" name="action" value="save">
+							Save</button>
+						<a href="{{url_for('profile_page')}}" type="button" class="btn btn-primary btn-lg btn-block login-button btn-warning">Back</a>
 							<br><p class="text-muted">Hint: you can edit only one information also.</p>
 						</div>
 
@@ -70,5 +71,10 @@
 				</div>
 			</div>
 			</div>
+			<script>
+			function myFunction() {
+		    alert("changes is saved!");
+			}
+</script>
 	{% endblock %}
 
