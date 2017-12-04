@@ -141,11 +141,62 @@ def home_page():
     else:
         return render_template('homepage.html')
 
-@app.route('/settings/', methods=['GET', 'POST'])
+
+
+@app.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings_page():
-    return render_template("settings.html")
+    if request.method == 'POST':
+        if request.form['action'] == 'deleteUser':
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
 
+                query = """DELETE FROM USERS WHERE ( USERNAME=%s )"""
+                cursor.execute(query, ([current_user.userName]))
+
+                connection.commit()
+            logout_user()
+            return redirect(url_for('home_page'))
+        elif request.form['action'] == 'updateUser':
+
+            email=request.form['inputEmail']
+            password=request.form['inputPassword']
+            hashed = pwd_context.encrypt(password)
+
+            execute=[]
+
+            query="""UPDATE USERS SET """
+
+
+            if len(email)!=0:
+                current_user.email=email
+                execute+=[str(email)]
+                query+="""MAIL=%s"""
+
+            if len(password)!=0:
+                current_user.password=hashed
+                execute+=[str(hashed)]
+                if  len(email)!=0:
+                    query+=""", """
+                query+="""PASSWORD=%s"""
+            if  len(email)==0 and len(password)==0:
+                return render_template('settings.html')
+            username=current_user.userName
+
+            query+=""" WHERE (USERNAME=%s)"""
+
+            execute+=[username]
+
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+
+                cursor.execute(query, execute)
+
+                connection.commit()
+            return render_template('settings.html')
+    else:
+        return render_template('settings.html')
+    
 
 @app.route('/profile/', methods=['GET', 'POST'])
 @login_required
