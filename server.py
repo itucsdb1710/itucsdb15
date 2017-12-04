@@ -219,9 +219,79 @@ def profile_page():
 @app.route('/edit_profile/', methods=['GET', 'POST'])
 @login_required
 def edit_profile_page():
-    return render_template("edit_profile.html")
+    if request.method == 'POST':
+        if request.form['action'] == 'save':
+            name=request.form['Name']
+
+            if len(name)!=0:
+                execute=[]
+                query="""UPDATE USERS SET """
+                current_user.name=name
+                execute+=[str(name)]
+                query+="""NAME=%s"""
+            elif len(name)==0:
+                execute=[]
+                query="""UPDATE USERS SET """
+                execute+=[str(current_user.name)]
+                query+="""NAME=%s"""
+
+            query+=""" WHERE (USERNAME=%s)"""
+            username=current_user.userName
+            execute+=[username]
+
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                cursor.execute(query, execute)
+                connection.commit()
+
+            surname=request.form['Surname']
+            age=request.form['Age']
+            country=request.form['Country']
+            city=request.form['City']
+            gender=request.form['Gender']
+
+            if len(surname)!=0 or len(age)!=0 or len(country)!=0 or len(city)!=0 or len(gender)!=0:
+                execute=[]
+                query="""UPDATE INFO SET """
+                if len(surname)!=0:
+                    execute+=[str(surname)]
+                    query+="""SURNAME=%s"""
+                if len(age)!=0:
+                    execute+=[str(age)]
+                    if len(surname)!=0:
+                        query+=""", """
+                    query+="""AGE=%s"""
+                if len(country)!=0:
+                    execute+=[str(country)]
+                    if len(surname)!=0 or len(age)!=0:
+                        query+=""", """
+                    query+="""COUNTRY=%s"""
+                if len(city)!=0:
+                    execute+=[str(city)]
+                    if len(surname)!=0 or len(age)!=0 or len(country)!=0:
+                        query+=""", """
+                    query+="""CITY=%s"""
+                if len(gender)!=0:
+                    execute+=[str(gender)]
+                    if len(surname)!=0 or len(age)!=0 or len(country)!=0 or len(city)!=0:
+                        query+=""", """
+                    query+="""GENDER=%s"""
+
+                query+=""" WHERE (USERNAME=%s)"""
+                username=current_user.userName
+                execute+=[username]
+
+                with dbapi2.connect(app.config['dsn']) as connection:
+                    cursor = connection.cursor()
+                    cursor.execute(query, execute)
+                    connection.commit()
 
 
+            return render_template('edit_profile.html')
+    else:
+        return render_template('edit_profile.html')
+    
+                    
 @app.route('/search/', methods=['GET', 'POST'])
 @login_required
 def search_page():
