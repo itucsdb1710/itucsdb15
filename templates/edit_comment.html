@@ -1,0 +1,46 @@
+{% extends "template2.html" %}
+{% block title %}edit comment{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row" >
+		<div class="col-md-5" >
+   				{% if post %}
+
+   				<div id="profile-col" >
+				<div style="margin: 90px 10px 50px 10px">
+				   				{% if current_user.userName != post[0][1] %}
+	    			<font size="4">Sorry, you can only edit your own comments !</font>
+	    			{% endif %}
+   					{% endif %}
+   				{% if current_user.userName == post[0][1] %}
+
+					<div style=display:inline-block>
+				<img style="max-width:50px;"src="{{ url_for('static', filename='images/avatar.png') }}">
+					</div>
+					<div style=display:inline-block>
+						<p><em>@</em><em>{{post[0][1]}}</em></p>
+					</div>
+					<div>
+						<pre>{{ post[0][2] }}<div style=display:inline-block class="pull-right">
+
+						<b><em>rate: {{ post[0][3] }}</b></em></div></pre>
+						</div>
+	    								<div style=display:inline-block>
+
+	    			<form action="" method="post">
+					<div class="pull-right">
+	    				<button onclick="myFunction()" class="glyphicon glyphicon-trash pull-right btn btn-danger"
+						type="submit" name="action" value="delete"> Delete</button>
+	    			</div>
+	    			</form>
+	    <script>
+			function myFunction() {
+		    alert("your comment has been deleted!");
+			}
+		</script>
+	    		</div>
+	    	</div>
+	    {% endif %}
+		</div>
+</div>
+{% endblock %}

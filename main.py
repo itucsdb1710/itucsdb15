@@ -169,3 +169,30 @@ def restaurant_page(rst_id):
             connection.commit()
         return render_template('restaurant_page.html', posts = posts, user = current_user, names = names,food=food)
 
+@site.route('/edit_comment/<comment_id>', methods=['GET', 'POST'])
+def edit_comment(comment_id):
+    if request.method == 'POST':
+
+        if request.form['action'] == 'delete':
+            with dbapi2.connect(flask.current_app.config['dsn']) as connection:
+                cursor = connection.cursor()
+
+                query = """DELETE FROM POST WHERE (POSTID= %s)"""
+                cursor.execute(query, [comment_id])
+                connection.commit()
+            return redirect(url_for('site.main_page'))
+
+        else:
+            return render_template('edit_comment.html')
+    else:
+        with dbapi2.connect(flask.current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT * FROM POST WHERE POSTID = %s"""
+
+            cursor.execute(query, [comment_id])
+            post = cursor.fetchall()
+
+            connection.commit()
+        return render_template('edit_comment.html', post = post)
+
