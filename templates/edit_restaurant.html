@@ -1,0 +1,62 @@
+{% extends "template2.html" %}
+{% block title %}Restaurant page{% endblock %}
+{% block body %}
+
+<div class="container">
+	<div class="row" >
+	<div class="col-md-4" >
+	</div>
+		<div class="col-md-4" >
+			<div id="profile-col" >
+				<div style="margin: 10px 10px 50px 10px">
+				<br><br><br><br>
+					{% if names %}
+					{% for name in names %}
+					<font size="10">{{name[1]}}<br> Restaurant</font>
+					<img style="max-width:250px; class="card-img-top" src="{{ url_for('static', filename='images/restaurant.png') }}" alt="Card image cap">
+												<br><br>
+					<form action="#" method="post">
+					<h4>Location:</h4>
+				<select name ="Location" class="form-control" >
+				<option value="" >Choose Location</option>
+				<option value ="Levent" > Levent </option>
+				<option value ="Taksim" >Taksim</option>
+				<option value ="Sisli" >Sisli</option>
+				<option value ="Bakirkoy" >Bakirkoy</option>
+				<option value ="Fatih" >Fatih</option>
+				<option value ="Kadikoy" >Kadikoy</option>
+				<option value ="Eyup" > Eyup </option>
+				<option value ="Kagithane" >Kagithane</option>
+				<option value ="Beylikduzu" > Beylikduzu </option>
+				<option value ="Avcilar" >Avcilar</option>
+				</select>
+					<h4>Food Category:</h4>
+				<select name ="Food" class="form-control" >
+				<option value="">Choose Food Category</option>
+				<option value ="Fast food" >Fast food</option>
+				<option value ="Turkish food" >Turkish food</option>
+				<option value ="Chinese food" >Chinese food</option>
+				<option value ="Arabian food" >Arabian food</option>
+				<option value ="Japanese food" >Japanese food</option>
+				<option value ="Italian food" >Italian food</option>
+				<option value ="Indian food" >Indian food</option>
+				<option value ="Mexican food" >Mexican food</option>
+				</select>
+
+					{% if user.userName == name[2] %}
+
+						<button class="glyphicon glyphicon-pencil pull-left btn btn-success"
+								type="submit" > Save</button>
+						<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}"
+						class="glyphicon glyphicon-remove pull-left btn btn-warning"> Cancel</a>
+						</form>
+					{% endif %}
+					{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div></div></div>
+
+
+
+{% endblock %}

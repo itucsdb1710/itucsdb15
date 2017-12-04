@@ -11,8 +11,20 @@
 					{% if names %}
 					{% for name in names %}
 					<h1 >{{name[1]}}<br> Restaurant</h1>
-					<img style="max-width:200px; class="card-img-top" src="{{ url_for('static', filename='images/restaurant.png') }}" alt="Card image cap">
+					<img style="max-width:200px; class="card-img-top" src="{{ url_for('static', filename='images/restaurant.png') }}" >
 												<br><br>
+						<form action="" method="post">
+
+		<button onclick="myFunction()"style="margin: -10px 00px 00px 65px" class="btn btn-default btn-sm"
+		data-toggle="tooltip" title="Add to favorite!" type="submit" name="action" value="favorite">
+          <span class="glyphicon glyphicon-heart"></span> Favorite
+        </button>
+	        <script>
+				function myFunction() {
+			    alert("Added to favorite!");
+				}
+			</script>
+			</form>
 					{% if food %}
 					{% for f in food %}
 						<h4>Location: {{f[2]}}</h4>
@@ -21,6 +33,9 @@
 					{% endif %}
 					{% if user.userName == name[2] %}
 						<form action="" method="post">
+
+						<a href="{{url_for('site.edit_restaurant_page', rst_id = name[0] )}}" class="glyphicon glyphicon-pencil pull-left btn btn-warning"
+								type="submit" name="action" value="edit"> Edit</a>
 						<button class="glyphicon glyphicon-trash pull-left btn btn-danger"
 								type="submit" name="action" value="delete"> Delete</button>
 						</form>
@@ -85,7 +100,6 @@
    				{% endfor %}
 				{% endif %}
 				</div>
-			 <!-- end of the post -->
 		</div>
 		</div>
 	</div>
