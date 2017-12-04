@@ -15,6 +15,7 @@ from passlib.apps import custom_app_context as pwd_context
 
 from user import User
 from main import *
+from restaurant import *
 
 lm = LoginManager()
 
@@ -200,7 +201,6 @@ def nearby_page():
     return render_template("nearby.html")
 
 @app.route('/initdb')
-@login_required
 def initialize_database():
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
@@ -216,6 +216,8 @@ def initialize_database():
         query = """DROP TABLE IF EXISTS POSTCAST CASCADE"""
         cursor.execute(query)
         query=  """DROP TABLE IF EXISTS RST_DETAILS CASCADE """
+        cursor.execute(query)
+        query = """DROP TABLE IF EXISTS MYFAVORITE CASCADE"""
         cursor.execute(query)
 
         query = """CREATE TABLE USERS (
@@ -278,9 +280,16 @@ def initialize_database():
                     PRIMARY KEY(ID) )"""
         cursor.execute(query)
 
-        query = """INSERT INTO RST_DETAILS ( NAME, LOCATION,CATEGORY ) VALUES ('Burger king', 'levent','fast food')"""
+        query = """INSERT INTO RST_DETAILS ( NAME, LOCATION,CATEGORY ) VALUES ('Burger king', 'Levent','Fast food')"""
         cursor.execute(query)
-        query = """INSERT INTO RST_DETAILS ( NAME, LOCATION,CATEGORY ) VALUES ('Mado', 'taksim','turkish food')"""
+        query = """INSERT INTO RST_DETAILS ( NAME, LOCATION,CATEGORY ) VALUES ('Mado', 'Taksim','Turkish food')"""
+        cursor.execute(query)
+
+        query= """CREATE TABLE MYFAVORITE (
+                    USERNAME VARCHAR(30) REFERENCES USERS(USERNAME) ON DELETE CASCADE,
+                    RESTAURANT VARCHAR(50) REFERENCES RESTAURANT(NAME) ON DELETE CASCADE,
+                    RST_ID SERIAL REFERENCES RESTAURANT(ID) ON DELETE CASCADE,
+                    PRIMARY KEY(USERNAME,RESTAURANT) )"""
         cursor.execute(query)
 
         connection.commit()
