@@ -19,7 +19,7 @@
                             {% if results %}
 				<ol>
 					{% for result in results %}
-					<a href=url_for('site.restaurant_page', rst_id = result[0])class="" style= "font-size: 15px">
+					<a href="{{ url_for('site.restaurant_page', rst_id = result[0]) }}"class="" style= "font-size: 15px">
 	         				<p>- {{result[1]}}</p>
 	       				</a>
 					{% endfor %}
