@@ -1,6 +1,6 @@
 applications:
 - services:
-  -ElaphantSQL-na
+  - ElaphantSQL-lj
   disk_quota: 1024M
   host: itucsdb1710
   name: itucsdb1710
