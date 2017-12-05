@@ -408,6 +408,7 @@ def initialize_database():
     return redirect(url_for('home_page'))
 
 if __name__ == '__main__':
+    app.secret_key = 'secret key'
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
     if VCAP_APP_PORT is not None:
         port, debug = int(VCAP_APP_PORT), False
