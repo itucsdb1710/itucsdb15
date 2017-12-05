@@ -19,15 +19,6 @@ from restaurant import *
 
 lm = LoginManager()
 
-def get_elephantsql_dsn(vcap_services):
-    """Returns the data source name for ElephantSQL."""
-    parsed = json.loads(vcap_services)
-    uri = parsed["elephantsql"][0]["credentials"]["uri"]
-    match = re.match('postgres://(.*?):(.*?)@(.*?)(:(\d+))?/(.*)', uri)
-    user, password, host, _, port, dbname = match.groups()
-    dsn = """user='{}' password='{}' host='{}' port={}
-             dbname='{}'""".format(user, password, host, port, dbname)
-    return dsn
 
 @lm.user_loader
 def load_user(userName):
@@ -196,7 +187,7 @@ def settings_page():
             return render_template('settings.html')
     else:
         return render_template('settings.html')
-    
+
 
 @app.route('/profile/', methods=['GET', 'POST'])
 @login_required
@@ -290,8 +281,8 @@ def edit_profile_page():
             return render_template('edit_profile.html')
     else:
         return render_template('edit_profile.html')
-    
-                    
+
+
 @app.route('/search/', methods=['GET', 'POST'])
 @login_required
 def search_page():
