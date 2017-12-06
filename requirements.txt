@@ -1,3 +1,2 @@
-postgreSQL
 Flask
 psycopg2
