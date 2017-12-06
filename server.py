@@ -9,7 +9,7 @@ from flask import redirect,render_template, flash
 from flask.helpers import url_for
 from flask import Blueprint, redirect, render_template, url_for
 from flask import current_app, request
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 from flask_login.utils import login_required, login_user, current_user, logout_user
 from passlib.apps import custom_app_context as pwd_context
 
