@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon3.png') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='signup1.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='background.css') }}" />
 
     <link rel="stylesheet" href="{{ url_for('static', filename='comments.css') }}" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -46,7 +47,9 @@
 			</div>
 			 </nav>
 
-    <body background="{{ url_for('static', filename='images/wallpaper1.png') }}">
+    <body class="parallax">
+
 {% block body %}{% endblock %}
+
     </body >
 </html>
