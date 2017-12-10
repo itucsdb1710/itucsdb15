@@ -389,8 +389,7 @@ def initialize_database():
         query= """CREATE TABLE POSTCAST (
                     ID SERIAL PRIMARY KEY,
                     RSTID INTEGER REFERENCES RESTAURANT(ID) ON DELETE CASCADE,
-                    POSTID INTEGER REFERENCES POST(POSTID) ON DELETE CASCADE,
-                    UNIQUE(RSTID, POSTID) )"""
+                    POSTID INTEGER REFERENCES POST(POSTID) ON DELETE CASCADE )"""
         cursor.execute(query)
 
         query= """CREATE TABLE RST_DETAILS (
