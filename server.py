@@ -314,7 +314,13 @@ def search_page():
 @app.route('/category/')
 @login_required
 def category_page():
-    return render_template("category.html")
+    with dbapi2.connect(app.config['dsn']) as connection:
+        cursor = connection.cursor()
+        query = """SELECT * FROM RST_DETAILS"""
+        cursor.execute(query)
+        names=cursor.fetchall()
+        connection.commit()
+        return render_template("category.html",names=names)
 
 @app.route('/nearby/')
 @login_required

@@ -7,32 +7,132 @@
 <br><br><br>
 <div class="container-fluid">
   <div class="col-xs-11 col-xs-push-3">
+  <h3>List of restaurants by Food Category: </h3>
+  <br><br>
     <div class="row vertical-align">
       <div class="col-xs-4">
-        <a href="#1" title=""> 1)</a>
+        <h2 style="font-size:20px">1) Fast food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Fast food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}"style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
       </div>
     <div class="col-xs-4">
-        <a href="#2" title=""> 2)</a>
-    </div>
+<h2 style="font-size:20px">2) Turkish food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Turkish food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}"style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
+		</div>
   </div>
-  <br><br><br>
+  <br><br><br><br><br>
 
   <div class="row vertical-align">
       <div class="col-xs-4">
-        <a href="#1" title=""> 3)</a>
+<h2 style="font-size:20px">3) Chinese food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Chinese food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
       </div>
     <div class="col-xs-4">
-        <a href="#2" title=""> 4)</a>
+<h2 style="font-size:20px">4) Arabian food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Arabian food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
     </div>
   </div>
-  <br><br><br>
+  <br><br><br><br><br>
 
   <div class="row vertical-align">
       <div class="col-xs-4">
-        <a href="#1" title=""> 5)</a>
+<h2 style="font-size:20px">5) Japanese food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Japanese food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
       </div>
     <div class="col-xs-4">
-        <a href="#2" title=""> 6)</a>
+<h2 style="font-size:20px">6) Italian food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Italian food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
+    </div>
+  </div>
+    <br><br><br><br><br>
+
+    <div class="row vertical-align">
+      <div class="col-xs-4">
+<h2 style="font-size:20px">7) Indian food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Indian food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
+      </div>
+    <div class="col-xs-4">
+<h2 style="font-size:20px">8) Mexican food</h2>
+      {% if names %}
+          	{% for name in names %}
+          	{% if name[3]=="Mexican food" %}
+
+			<a href="{{url_for('site.restaurant_page', rst_id = name[0] )}}" style= "font-size: 15px">
+		<li>{{name[1]}}</li>
+	       	</a>
+
+        {% endif %}
+        {% endfor %}
+		{% endif %}
     </div>
   </div>
 </div>
