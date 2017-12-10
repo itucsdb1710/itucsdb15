@@ -322,10 +322,21 @@ def category_page():
         connection.commit()
         return render_template("category.html",names=names)
 
-@app.route('/nearby/')
+
+@app.route('/nearby/', methods=['GET', 'POST'])
 @login_required
 def nearby_page():
-    return render_template("nearby.html")
+    if request.method == 'POST':
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            location = request.form['Location']
+            query = """SELECT * FROM RST_DETAILS WHERE LOCATION = %s"""
+            cursor.execute(query,[location])
+            names = cursor.fetchall()
+            connection.commit()
+        return render_template("nearby.html",names=names)
+    else:
+        return render_template("nearby.html")
 
 @app.route('/initdb')
 def initialize_database():
