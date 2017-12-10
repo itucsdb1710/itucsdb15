@@ -10,17 +10,34 @@
 
 <div style="width:520px;margin:0px auto;margin-top:30px;">
   <h2>Choose to search nearby Restaurant:</h2>
-  <select class="chosen" style="width:500px;">
-  <option>Istanbul - şişli</option>
-  <option>Istanbul - kağıthane</option>
-  <option>Istanbul - levent</option>
-  <option>Istanbul - beşiktaş</option>
-  <option>Ankara - Kazan</option>
-  <option>Ankara - Nallıhan</option>
-  <option>Ankara - Pursaklar</option>
-  <option>Ankara - Etimesgut</option>
-  </select>
+  <form  method="post">
+  <select  name ="Location"class="chosen" style="width:500px;">
+				<option value="" >Choose Location</option>
+				<option value ="Levent" > Levent </option>
+				<option value ="Taksim" >Taksim</option>
+				<option value ="Sisli" >Sisli</option>
+				<option value ="Bakirkoy" >Bakirkoy</option>
+				<option value ="Fatih" >Fatih</option>
+				<option value ="Kadikoy" >Kadikoy</option>
+				<option value ="Eyup" > Eyup </option>
+				<option value ="Kagithane" >Kagithane</option>
+				<option value ="Beylikduzu" > Beylikduzu </option>
+				<option value ="Avcilar" >Avcilar</option>
+  </select><button class=" pull-right btn btn-warning"type="submit" > Search</button>
+  				<br><br><br>
+              {% if names %}
+				<ol>
+					{% for name in names %}
+					<a href="{{ url_for('site.restaurant_page', rst_id = name[0]) }}"class="" style= "font-size: 15px">
+	         				<p>- {{name[1]}}</p>
+	       				</a>
+					{% endfor %}
+				 </ol>
+
+				{% endif %}
 </div>
+
+</form>
 
 <script type="text/javascript">
       $(".chosen").chosen();
