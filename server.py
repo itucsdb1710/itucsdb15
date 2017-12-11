@@ -201,19 +201,41 @@ def settings_page():
 @app.route('/profile/', methods=['GET', 'POST'])
 @login_required
 def profile_page():
-    if request.method == 'GET':
-        with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-        query = """SELECT * FROM USERS"""
-        cursor.execute(query)
-        info=cursor.fetchall()
-        connection.commit()
-        query = """SELECT * FROM INFO"""
-        cursor.execute(query)
-        details=cursor.fetchall()
-
-        connection.commit()
-        return render_template('profile.html',info=info,user=current_user,details=details)
+    try:
+        if request.method == 'POST':
+             with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                friend=request.form['friend']
+                if request.form['action'] == 'add':
+                    query = """INSERT INTO FRIENDS(USERNAME, FRIEND) VALUES(%s, %s)"""
+                    cursor.execute(query,(current_user.userName, friend))
+                    connection.commit()
+       
+                elif request.form['action'] == 'remove':
+                    query = """DELETE FROM FRIENDS WHERE (USERNAME= %s and FRIEND = %s)"""
+                    cursor.execute(query,(current_user.userName, friend))
+                    connection.commit()
+                return redirect(url_for('profile_page'))
+        else:
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+            query = """SELECT * FROM USERS"""
+            cursor.execute(query)
+            info=cursor.fetchall()
+            connection.commit()
+            query = """SELECT * FROM INFO"""
+            cursor.execute(query)
+            details=cursor.fetchall()
+            query = """SELECT * FROM FRIENDS """
+            cursor.execute(query)
+            friends=cursor.fetchall()
+    
+            connection.commit()
+            return render_template('profile.html',info=info,user=current_user,details=details,friends=friends)
+    except Exception as e:
+        return redirect(url_for('profile_page'))
+   
+    
 
 
 @app.route('/edit_profile/', methods=['GET', 'POST'])
@@ -357,7 +379,9 @@ def initialize_database():
         cursor.execute(query)
         query = """DROP TABLE IF EXISTS MYFAVORITE CASCADE"""
         cursor.execute(query)
-
+        query = """DROP TABLE IF EXISTS FRIENDS CASCADE"""
+        cursor.execute(query)
+        
         query = """CREATE TABLE USERS (
                     NAME VARCHAR(80) NOT NULL,
                     USERNAME VARCHAR(20) PRIMARY KEY,
@@ -429,6 +453,12 @@ def initialize_database():
                     PRIMARY KEY(USERNAME,RESTAURANT) )"""
         cursor.execute(query)
 
+        query= """CREATE TABLE FRIENDS (
+                    USERNAME VARCHAR(30) REFERENCES USERS(USERNAME) ON DELETE CASCADE,
+                    FRIEND VARCHAR(50) REFERENCES USERS(USERNAME) ON DELETE CASCADE,
+                    PRIMARY KEY(USERNAME,FRIEND) )"""
+        cursor.execute(query)
+        
         connection.commit()
     return redirect(url_for('home_page'))
 
