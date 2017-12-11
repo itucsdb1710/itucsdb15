@@ -5,6 +5,29 @@
 {% block body %}
 		<div class="container">
 			<div class="row main">
+			<div class="col-md-4" >
+				<div style="margin: 10px 10px 60px 10px">
+				
+					<h1 align="center">Add/Remove a friend</h1>
+					<p align="center">you can add or remove a friend to your profile!</p>
+					<form action="" method="post">
+					<div class="form-group" align="center">
+		    			<input type="text" name="friend" placeholder="username of your friend.." class="form-control" required autofocus>
+		    		</div>
+					<button class=" pull-right btn btn-success btn"
+						type="submit" name="action" value="add">add</button>
+							<button class=" pull-right btn btn-danger btn"
+						type="submit" name="action" value="remove">remove</button>
+						{% if friends %}
+          	{% for f in friends %}
+          	{% if user.userName==f[0] %}
+	         		<li>{{f[1]}}</li>
+	       			{% endif %}
+					{% endfor %}
+					{% endif %}</form>				
+				</div>
+			</div></div></div>
+			
 				<div class="panel-heading">
 	               <div class="panel-title text-center">
 	               		<h1 class="title">Personal Profile </h1>
@@ -12,7 +35,7 @@
 	               	</div>
 	            </div>
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
+					<form class="form-horizontal" method="get" action="#">
 
 						<div >
 		<h1 ><img class="img-responsive center-block" style="max-width:100px;"src="{{ url_for('static', filename='images/avatar.png') }}"></h1>
