@@ -12,6 +12,26 @@ Below you can see the tables of our database and their attributes, also the conn
 
      *Database of Restaurant Reviewer* 
 
+Entity Distribution
+--------------
+
+:Lina Alrehaili:
+
+   * USERS
+   * RESTAURANT
+   * POST
+   * POSTCAST
+   * MYFAVOURITE
+
+:Jilan Alrehaili:
+
+   * RST_DETAILS
+   * FRIENDS
+   * INFO
+
+
+Details
+----
 .. toctree::
 
    member1
