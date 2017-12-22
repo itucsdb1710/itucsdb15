@@ -36,8 +36,8 @@ the user can access his edit profile page by clicking on 'edit'. all his informa
 
 
 
-edit profile page 1
---------------------
+*edit profile page 1*
+
 
 .. figure:: images/jilan/editProfilep1.png
      :scale: 100 %
@@ -52,8 +52,7 @@ the user in this case choice to update two fields the country and the city, lets
 
 
 
-edit profile page 2
---------------------
+*edit profile page 2*
 
 .. figure:: images/jilan/editProfilep2.png
      :scale: 100 %
@@ -67,8 +66,7 @@ the user have clicked 'save' to save his changes, and a message window appeared 
      
 
 
-edit profile page 3
---------------------
+*edit profile page 3*
 
 .. figure:: images/jilan/editProfilep3.png
      :scale: 100 %
@@ -100,8 +98,8 @@ only the user can edit this information for everyone to see.
 
 
 
-friend page 1
--------------
+*friend page 1*
+
 
 .. figure:: images/jilan/friendp1.png
      :scale: 100 %
@@ -124,8 +122,7 @@ nearby page
      
 the user can access nearby page from the navigation bar by clicking on 'nearby resturants'.the user can feel free to search for a resturant by its location, we defined this in a drop-down list where he can see all the resturants in the locations.
 
-nearby page 1
--------------
+*nearby page 1*
 
 .. figure:: images/jilan/nearbyp1.png
      :scale: 100 %
@@ -136,8 +133,8 @@ nearby page 1
      
 the user decided to search at this location!
 
-nearby page 2
--------------
+*nearby page 2*
+
 
 .. figure:: images/jilan/nearbyp2.png
      :scale: 100 %
@@ -158,8 +155,8 @@ search page
      
 the user can access search page from the navigation bar by clicking on 'search'.this website has another feature which allows the user to search for resturants by its name.
 
-search page 1
--------------
+*search page 1*
+
 
 .. figure:: images/jilan/search1p.png
      :scale: 100 %
@@ -169,8 +166,8 @@ search page 1
      
 the user decided to search for 'Burger king' resturant.
 
-search page 2
--------------
+*search page 2
+
 
 .. figure:: images/jilan/search2p.png
      :scale: 100 %
