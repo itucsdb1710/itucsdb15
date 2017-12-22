@@ -1,4 +1,1 @@
-Flask
-psycopg2
-flask_login
-passlib
+Sphinx>=1.5
