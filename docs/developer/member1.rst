@@ -152,7 +152,7 @@ In the **edit_restaurant page** I have used the select operation to print the na
 
 RST_DETAILS TABLE
 -----------------
-This table stores the location and food category, you can see the table in jilan's part, but i have used an update operation of this table to update the location and food category of the selected restaurant as shown below.
+To have full informatoin about this table you can see it in jilan's part, but i have used an update operation in this table to update the location and food category of the selected restaurant as shown below.
 
 .. code-block:: sql
 
@@ -171,7 +171,7 @@ This table stores the location and food category, you can see the table in jilan
             query+=""" WHERE (ID=%s)"""
             execute+=[rst_id[0]]
             
- the code above can let you update one information or both of them.
+the code above can let you update one information or both of them.
  
 MYFAVOURITE TABLE
 ------------------
