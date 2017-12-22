@@ -14,7 +14,7 @@ Restaurant Reviewer is a platform where a user can add a Restaurant, other users
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 4
 
    user/index
    developer/index
