@@ -1,20 +1,19 @@
 User Guide
 ==========
 
-**explain how your application works from the user perspective, use
-screenshots whereever appropriate**
+In this section, we show how the application works from the user perspective.
 
-**to add a picture, use the following example**::
+If you want to learn more about our database design then we suggest you to look in the Developer Guide.
 
-   .. figure:: picture.png
-      :scale: 50 %
-      :alt: map to buried treasure
 
-      This is the caption of the figure (a simple paragraph).
+.. figure:: images/homepage.png
+     :scale: 100 %
+     :alt: Home page
+
+     Home page of Restaurant Reviewer
+
 
 .. toctree::
 
    member1
    member2
-
-   
