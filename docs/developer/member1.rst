@@ -173,7 +173,7 @@ This table stores the location and food category, you can see the table in jilan
             
  the code above can let you update one information or both of them.
  
- MYFAVOURITE TABLE
+MYFAVOURITE TABLE
 ------------------
 
 The MYFAVOURITE table stores the username, restaurant name and restaurant id as shown below.
