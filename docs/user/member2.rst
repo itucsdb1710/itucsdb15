@@ -166,7 +166,7 @@ the user can access search page from the navigation bar by clicking on 'search'.
      
 the user decided to search for 'Burger king' resturant.
 
-*search page 2
+*search page 2*
 
 
 .. figure:: images/jilan/search2p.png
