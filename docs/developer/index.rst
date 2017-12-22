@@ -4,23 +4,13 @@ Developer Guide
 Database Design
 ---------------
 
-**explain the database design of your project**
+Below you can see the tables of our database and their attributes, also the connections between the tables.
 
-**include the E/R diagram(s)**
+.. figure:: images/database.png
+     :scale: 100 %
+     :alt: databse
 
-Code
-----
-
-**explain the technical structure of your code**
-
-**to include a code listing, use the following example**::
-
-   .. code-block:: python
-
-      class Foo:
-
-         def __init__(self, x):
-            self.x = x
+     *Database of Restaurant Reviewer* 
 
 .. toctree::
 
