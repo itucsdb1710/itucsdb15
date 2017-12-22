@@ -1,22 +1,39 @@
-User Guide
-==========
+Installation Guide
+==================
 
-**explain how your application works from the user perspective, use
-screenshots whereever appropriate**
+You have to install all of the below application in order to run our project successfully.
 
-**to add a picture, use the following example**::
+After that run "server.py" and connect to "localhost:5000".
 
-   .. figure:: picture.png
-      :scale: 50 %
-      :alt: map to buried treasure
+1. Install Python (version 3.4 or higher)
 
-      This is the caption of the figure (a simple paragraph).
+https://www.python.org/downloads/
 
-.. toctree::
+2. Install Flask
 
-   member1
-   member2
-   member3
-   member4
-   member5
+.. code-block:: console
+
+   pip3 install -U flask
+
+3. Install Psycopg2
+
+.. code-block:: console
+
+   pip3 install -U psycopg2
+
+4. Install flask_login
+
+.. code-block:: console
+
+   pip3 install flask-login
+
+5. Install passlib
+
+.. code-block:: console
+
+   pip3 install passlib
+
+
+
+
    
